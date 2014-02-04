@@ -10,7 +10,7 @@
 #include "physics.h"
 #include "collidables.h"
 
-
+#include <ctime>
 
 
 float t=0;
@@ -153,9 +153,21 @@ void Render()
 
 //-----------------------------------------------------------
 
+#define FRAMES_PER_UPDATE 250.
+#define PRINT_I(fmt, args...) printf("Info: " fmt, args)
 
 void Idle()
 {
+	static int frames = 0;
+	static time_t fpstime = time(0);
+
+	if (frames++ >= FRAMES_PER_UPDATE) {
+		double secs = difftime(time(0), fpstime);
+		PRINT_I ("FPS: %f (secs: %f)\n", ((float)frames)/secs, secs);
+		fpstime = time(0);
+		frames = 0;
+	}
+
 	t+=0.01;
 	float e=1.0;
 	float dt=0.01;
