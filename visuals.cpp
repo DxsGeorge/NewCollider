@@ -4,6 +4,7 @@
 #include <math.h>
 #include "gl/glut.h"   // - An interface and windows 
 //   management library
+
 #include "math3.h"
 #include "visuals.h"   
 #include "physics.h"

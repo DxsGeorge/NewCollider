@@ -135,9 +135,9 @@ public:
 		angle=0;
 	}
 };
-using namespace irr::core;
-quaternion fromVector (vector3df v){
-	quaternion q;
+
+inline irr::core::quaternion fromVector (irr::core::vector3df v){
+	irr::core::quaternion q;
 	q.X=v.X;
 	q.Y=v.Y;
 	q.Z=v.Z;
@@ -145,12 +145,12 @@ quaternion fromVector (vector3df v){
 	return q;
 }
 
-vector3df purequatToVector(quaternion q) {
-	return vector3df(q.X,q.Y,q.Z);
+inline irr::core::vector3df purequatToVector(irr::core::quaternion q) {
+	return irr::core::vector3df(q.X,q.Y,q.Z);
 }
 
-vector3df fromRotation(quaternion q,vector3df v){
-	quaternion q1;
+inline irr::core::vector3df fromRotation(irr::core::quaternion q,irr::core::vector3df v){
+	irr::core::quaternion q1;
 	q1=fromVector(v);
 	q1=q*q1*q.makeInverse();
 	return v=purequatToVector(q1);

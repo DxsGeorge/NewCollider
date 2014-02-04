@@ -1,7 +1,6 @@
 #ifndef PHYSICS_H
 #define PHYSICS_H
 
-#include "math3.h"
 #include "collidables.h"
 
 void checkSphereCollision (Sphere& sph1, Sphere& sph2, float e);

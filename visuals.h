@@ -1,5 +1,6 @@
 #ifndef VISUALS_H
 #define VISUALS_H
+
 #include "math3.h"
 #include "collidables.h"
 #include <vector>
