@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
 { 
 	int N,choice;
 	float R;
-	printf("Molecules/Balls? (1 for balls)");
+	printf("Molecules/Balls? (1 for balls) \n");
 	scanf_s("%d",&choice);
 	printf("How many? \n");
 	scanf_s("%d",&N);
@@ -38,6 +38,7 @@ int main(int argc, char* argv[])
 	glutDisplayFunc(Render);
 	glutReshapeFunc(Resize);
 	glutIdleFunc(Idle);
+	glutKeyboardFunc(Keyboard);
 	glutMainLoop();
 	return 0;
 

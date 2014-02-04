@@ -17,6 +17,7 @@ class Molecule3{
 public:
 	Point cm;
 	float R;
+	irr::core::vector3df centersp;
 	irr::core::vector3df sph1;
 	irr::core::vector3df sph2;
 	irr::core::vector3df sph3;

@@ -111,13 +111,13 @@ void Render()
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	//glTranslatef(0,0,-8*N*R);
+	glTranslatef(0,0,-100);
 	//glRotatef(45,0,1,0);
 	glTranslatef(tranx,trany,tranz);
 	glRotatef(rotx,1,0,0);
 	glRotatef(roty,0,1,0);
 	glRotatef(rotz,0,0,1);
-	//Box(N,R);
+	//Box(50,0.25);
 	glColor4f(1,0,0,1.0);
 	if (spheres.size()>0){
 		for (int i=0;i<int(spheres.size());i++){
@@ -159,12 +159,12 @@ void Idle()
 	t+=0.01;
 	float e=1.0;
 	float dt=0.01;
-	if (spheres.size()>0){
+	if (int(spheres.size())>0){
 		for (int i=0;i<int(spheres.size());i++){
 			for (int j=i+1;j<int(spheres.size());j++){
 				checkSphereCollision (spheres.at(i), spheres.at(j),e);
 				}
-			BallToWallCheck(spheres.at(i),spheres.size()*spheres.at(i).R);
+			BallToWallCheck(spheres.at(i),20);
 			UpdateSpherePos(spheres.at(i),dt);
 		}
 	}
@@ -173,7 +173,7 @@ void Idle()
 			for (int j=i+1;j<int(mols.size());j++){
 				checkMolCollision(mols.at(i),mols.at(j),e);
 			}
-			MolToWallCheck(mols.at(i));
+			MolToWallCheck(mols.at(i),50);
 			UpdateMolPos(mols.at(i),dt);
 		}	
 	}
@@ -198,8 +198,7 @@ void Resize(int w, int h)
 
 
 	float aspect = (float)w/(float)h;             /// aspect ratio
-	if (spheres.size()>0) gluPerspective(60.0, aspect, 1.0, 500.0+spheres.size()*spheres.at(0).R);
-	else gluPerspective(60.0, aspect, 1.0, 500.0+mols.size()*mols.at(0).R);
+	gluPerspective(60.0, aspect, 1.0, 500.0+20);
 }
 
 

@@ -11,23 +11,23 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\GitHub\Collider\collidables.h" />
-    <ClInclude Include="..\..\..\..\GitHub\Collider\InitializeItems.h" />
-    <ClInclude Include="..\..\..\..\GitHub\Collider\math3.h" />
-    <ClInclude Include="..\..\..\..\GitHub\Collider\physics.h" />
-    <ClInclude Include="..\..\..\..\GitHub\Collider\visuals.h" />
+    <ClCompile Include="..\InitiliazeItems.cpp" />
+    <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="..\physics.cpp" />
+    <ClCompile Include="..\visuals.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\GitHub\Collider\InitiliazeItems.cpp" />
-    <ClCompile Include="..\..\..\..\GitHub\Collider\main.cpp" />
-    <ClCompile Include="..\..\..\..\GitHub\Collider\math.cpp" />
-    <ClCompile Include="..\..\..\..\GitHub\Collider\physics.cpp" />
-    <ClCompile Include="..\..\..\..\GitHub\Collider\visuals.cpp" />
+    <ClInclude Include="..\collidables.h" />
+    <ClInclude Include="..\InitializeItems.h" />
+    <ClInclude Include="..\math3.h" />
+    <ClInclude Include="..\physics.h" />
+    <ClInclude Include="..\visuals.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{30E134E3-1A17-407E-A520-3E669E53C53D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Collider</RootNamespace>
+    <ProjectName>NewCollider</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -52,7 +52,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -64,11 +64,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\user\Desktop\irrlicht-1.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\user\Documents\GitHub\NewCollider\irr;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\user\Documents\GitHub\NewCollider\irr;C:\Users\user\Documents\GitHub\NewCollider\gl;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
