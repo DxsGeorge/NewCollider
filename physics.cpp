@@ -25,19 +25,19 @@ void checkSphereCollision (Sphere& sph1, Sphere& sph2, float e){
 }
 
 void BallToWallCheck(Sphere& sph,float size){
-	if (fabs(sph.cm.x+sph.R)>size) {
-		if (sph.cm.x<0) sph.cm.x+=fabs(sph.cm.x-sph.R-size);
-		else sph.cm.x-=fabs(sph.cm.x+sph.R-size);
+	if (float dif=fabs(sph.cm.x)+sph.R-size>0) {
+		if (sph.cm.x<0) sph.cm.x+=(dif+0.5);
+		else sph.cm.x-=(dif+0.5);
 		sph.speed.X*=-1;
 	}
-	if (fabs(sph.cm.y+sph.R)>size) {
-		if (sph.cm.y<0) sph.cm.y+=fabs(sph.cm.y-sph.R-size);
-		else sph.cm.y-=fabs(sph.cm.y+sph.R-size);
+	if (float dif=fabs(sph.cm.y)+sph.R-size>0) {
+		if (sph.cm.y<0) sph.cm.y+=dif+0.5;
+		else sph.cm.y-=(dif+0.5);
 		sph.speed.Y*=-1;
 	}
-	if (fabs(sph.cm.z+sph.R)>size) {
-		if (sph.cm.z<0) sph.cm.z+=fabs(sph.cm.z-sph.R-size);
-		else sph.cm.z-=fabs(sph.cm.z+sph.R-size);
+	if (float dif=fabs(sph.cm.z)+sph.R-size>0) {
+		if (sph.cm.z<0) sph.cm.z+=(dif+0.5);
+		else sph.cm.z-=(dif+0.5);
 		sph.speed.Z*=-1;
 	}
 }
@@ -47,33 +47,43 @@ void UpdateSpherePos(Sphere& sph, float dt){
 }
 
 void checkMolCollision(Molecule3& m1, Molecule3& m2, float e){
-	if (m1.cm.distance(m2.cm)<m1.R+m2.R){
-	}
 }
 
 void MolCollisionResponse(Molecule3& m1, Molecule3& m2, float e){
 };
 
 void MolToWallCheck(Molecule3& m,float size){
+	if (float dif=fabs(m.cm.X)+m.R-size>0) {
+		if (m.cm.X<0) m.cm.X+=(dif+0.5);
+		else m.cm.X-=(dif+0.5);
+		m.centersp.X*=-1;
+	}
+	if (float dif=fabs(m.cm.Y)+m.R-size>0) {
+		if (m.cm.Y<0) m.cm.Y+=dif+0.5;
+		else m.cm.Y-=(dif+0.5);
+		m.centersp.Y*=-1;
+	}
+	if (float dif=fabs(m.cm.Z)+m.R-size>0) {
+		if (m.cm.Z<0) m.cm.Z+=(dif+0.5);
+		else m.cm.Z-=(dif+0.5);
+		m.centersp.Z*=-1;
+	}
 };
 
 void UpdateMolPos(Molecule3& m, float dt){
-	irr::core::vector3df temp1;
-	irr::core::quaternion tempw(m.w.v.X*sin((m.w.angle*3.14/180)/2),m.w.v.Y*sin((m.w.angle*3.14/180)/2),m.w.v.Z*sin((m.w.angle*3.14/180)/2),cos((m.w.angle*3.14/180)/2));
-	//temp1 = irr::core::vector3df(m.cm.x,m.cm.y,m.cm.z);
-	m.orientation=m.orientation+tempw*dt*0.5;
-#if 1
-	m.sph1-=temp1;
-	m.sph2-=temp1;
-	m.sph3-=temp1;
-#endif
-	m.sph1=fromRotation(m.orientation,m.sph1);
-	m.sph2=fromRotation(m.orientation,m.sph2);
-	m.sph3=fromRotation(m.orientation,m.sph3);
-#if 1
-	m.sph1+=temp1;
-	m.sph2+=temp1;
-	m.sph3+=temp1;
-#endif 
-	//m.cm=m.cm+m.centersp*dt;
+	//m.cm+=m.centersp*dt;
+	m.orax.angle+=m.w.angle*dt;
+	if (m.orax.angle>6.28) m.orax.angle-=6.28;
+	m.mat.setRotationAxisRadians(m.orax.angle,m.orax.v);
+	//m.mat[15]=1;
+	m.sph1-=m.cm;
+	m.sph2-=m.cm;
+	m.sph3-=m.cm;
+	m.mat.rotateVect(m.sph1);
+	m.mat.rotateVect(m.sph2);
+	m.mat.rotateVect(m.sph3);
+	m.sph1+=m.cm;
+	m.sph2+=m.cm;
+	m.sph3+=m.cm;
+	
 };

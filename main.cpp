@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
 	glutInitDisplayMode(GLUT_RGBA|GLUT_DOUBLE);
 	glutInitWindowSize(960,480);
 	glutInitWindowPosition(50,50);
-	mainwin=glutCreateWindow("Acton!");
+	mainwin=glutCreateWindow("Action!");
 	Setup();
 	glutDisplayFunc(Render);
 	glutReshapeFunc(Resize);
