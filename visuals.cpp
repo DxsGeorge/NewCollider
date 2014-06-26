@@ -2,15 +2,15 @@
 #include <time.h>
 #include <vector>
 #include <math.h>
-#include "gl/glut.h"   // - An interface and windows 
+#include <glut.h>   // - An interface and windows
 //   management library
 
 #include "math3.h"
-#include "visuals.h"   
+#include "visuals.h"
 #include "physics.h"
 #include "collidables.h"
 
-
+#include <ctime>
 
 
 float t=0;
@@ -32,7 +32,7 @@ void axes()
 	glVertex2f(0.0,0.0);
 	glVertex2f(0.0,100.0);
 	glEnd();
-	glPopMatrix(); 
+	glPopMatrix();
 }
 
 void Box(int N, float R){
@@ -105,7 +105,7 @@ void Box(int N, float R){
 
 
 void Render()
-{    
+{
 	glClear(GL_COLOR_BUFFER_BIT);
 	glClear(GL_DEPTH_BUFFER_BIT);
 
@@ -153,9 +153,21 @@ void Render()
 
 //-----------------------------------------------------------
 
+#define FRAMES_PER_UPDATE 250.
+#define PRINT_I(fmt, args...) printf("Info: " fmt, args)
 
 void Idle()
 {
+	static int frames = 0;
+	static time_t fpstime = time(0);
+
+	if (frames++ >= FRAMES_PER_UPDATE) {
+		double secs = difftime(time(0), fpstime);
+		PRINT_I ("FPS: %f (secs: %f)\n", ((float)frames)/secs, secs);
+		fpstime = time(0);
+		frames = 0;
+	}
+
 	t+=0.01;
 	float e=1.0;
 	float dt=0.01;
@@ -175,23 +187,23 @@ void Idle()
 			}
 			MolToWallCheck(mols.at(i),50);
 			UpdateMolPos(mols.at(i),dt);
-		}	
+		}
 	}
-	glutPostRedisplay(); 
+	glutPostRedisplay();
 }
 
 
 //-----------------------------------------------------------
 
 void Resize(int w, int h)
-{ 
+{
 	// define the visible area of the window ( in pixels )
 	if (h==0) h=1;
-	glViewport(0,0,w,h); 
+	glViewport(0,0,w,h);
 
 	// Setup viewing volume
 
-	glMatrixMode(GL_PROJECTION); 
+	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
 	//glOrtho(-4*N*R,4*N*R,-4*N*R,4*N*R,4*N*R,-4*N*R);
@@ -204,8 +216,8 @@ void Resize(int w, int h)
 
 //-----------------------------------------------------------
 
-void Setup()  
-{ 
+void Setup()
+{
 
 	//glEnable( GL_CULL_FACE );
 	glEnable( GL_BLEND );
@@ -213,8 +225,8 @@ void Setup()
 	glShadeModel( GL_SMOOTH );
 
 	glEnable(GL_DEPTH_TEST);
-	glDepthFunc( GL_LEQUAL );      
-	glClearDepth(1.0); 		      
+	glDepthFunc( GL_LEQUAL );
+	glClearDepth(1.0);
 
 
 	//Set up light source
@@ -271,7 +283,7 @@ void Keyboard(unsigned char key,int x,int y)
 		break;
 	case 'x' : tranz+=2.0f;
 		break;
-	default : 
+	default :
 		break;
 
 	}
@@ -279,6 +291,3 @@ void Keyboard(unsigned char key,int x,int y)
 	glutPostRedisplay();
 	//
 }
-
-
-

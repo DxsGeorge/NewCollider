@@ -2,10 +2,10 @@
 
 #include <time.h>
 #include <vector>
-#include "gl/glut.h" 
+#include <glut.h>
 #include "irrlicht.h"
 #include "visuals.h"
-#include "InitializeItems.h" 
+#include "InitializeItems.h"
 
 ////////////////// State Variables ////////////////////////
 
@@ -14,18 +14,18 @@ std::vector<Molecule3> mols;
 
 /////////////// Main Program ///////////////////////////
 int main(int argc, char* argv[])
-{ 
+{
 	int N,choice;
 	float R;
 	printf("Molecules/Balls? (1 for balls) \n");
-	scanf_s("%d",&choice);
+	scanf("%d",&choice);
 	printf("How many? \n");
-	scanf_s("%d",&N);
+	scanf("%d",&N);
 	printf("radius? \n");
-	scanf_s("%f",&R);
-	if (choice==1) 
+	scanf("%f",&R);
+	if (choice==1)
 		spheres=InitializeAtoms(N,R);
-	else 
+	else
 		mols=InitializeMol(N,R);
 
 	int mainwin;
@@ -43,5 +43,4 @@ int main(int argc, char* argv[])
 	return 0;
 
 
-}  
-
+}
